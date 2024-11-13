@@ -10,6 +10,8 @@ import Registro from "../views/auth/Registro.vue";
 import Perfil from "../views/admin/Perfil.vue"
 import Usuario from "../views/admin/usuario/Usuario.vue"
 
+import AppLayout from '@/layout/AppLayout.vue';
+
 const routes = [
     { path: '/', component: Inicio },
     { path: '/servicios', component: Servicios },
@@ -18,8 +20,14 @@ const routes = [
     { path: '/auth/login', name: 'Login' ,component: Login, meta: {redirectIfAuth: true} },
     { path: '/auth/registro', component: Registro },
 
-    { path: '/admin/perfil', name: 'Perfil', component: Perfil, meta: {requireAuth: true} },
-    { path: '/admin/usuario', name: 'Usuario', component: Usuario, meta: {requireAuth: true} },
+    {
+        path: '/admin',
+        component: AppLayout,
+        children: [
+            { path: 'perfil', name: 'Perfil', component: Perfil, meta: {requireAuth: true} },
+            { path: 'usuario', name: 'Usuario', component: Usuario, meta: {requireAuth: true} },
+        ]
+    }
 
 ];
 

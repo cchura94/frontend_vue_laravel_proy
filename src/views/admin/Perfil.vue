@@ -1,5 +1,7 @@
 <template>
     <h1>MI PERFIL</h1>
+    <InputText type="text" v-model="value" />
+
 
     <div v-if="perfil.id">
         <h2>NOMBRE: {{ perfil.name }}</h2>

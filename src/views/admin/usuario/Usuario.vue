@@ -68,7 +68,8 @@
             usuarios.value = data;
             
         } catch (error) {
-            alert("Error al recuperar los datos de usuarios");
+            console.log(error);
+            // alert("Error al recuperar los datos de usuarios");
         }
     }
 
