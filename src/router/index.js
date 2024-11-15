@@ -9,6 +9,7 @@ import Registro from "../views/auth/Registro.vue";
 
 import Perfil from "../views/admin/Perfil.vue"
 import Usuario from "../views/admin/usuario/Usuario.vue"
+import Categoria from "../views/admin/categoria/Categoria.vue"
 
 import AppLayout from '@/layout/AppLayout.vue';
 
@@ -26,6 +27,7 @@ const routes = [
         children: [
             { path: 'perfil', name: 'Perfil', component: Perfil, meta: {requireAuth: true} },
             { path: 'usuario', name: 'Usuario', component: Usuario, meta: {requireAuth: true} },
+            { path: 'categoria', name: 'Categoria', component: Categoria, meta: {requireAuth: true} },
         ]
     }
 

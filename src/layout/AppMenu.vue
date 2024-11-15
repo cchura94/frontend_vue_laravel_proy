@@ -24,16 +24,16 @@ const model = ref([
         label: 'Gestión Inventario',
         icon: 'pi pi-fw pi-briefcase',
         items: [
-            { label: 'Categoria', icon: 'pi pi-fw pi-id-card', to: '/admin/usuario' },
-            { label: 'Producto', icon: 'pi pi-fw pi-check-square', to: '/admin/role' }            
+            { label: 'Categoria', icon: 'pi pi-fw pi-id-card', to: '/admin/categoria' },
+            { label: 'Producto', icon: 'pi pi-fw pi-check-square', to: '/admin/producto' }            
         ]
     },
     {
         label: 'Pedidos',
         items: [
-            { label: 'Clientes', icon: 'pi pi-fw pi-id-card', to: '/admin/usuario' },
-            { label: 'Pedidos', icon: 'pi pi-fw pi-check-square', to: '/admin/role' },
-            { label: 'Nuevo Pedido', icon: 'pi pi-fw pi-check-square', to: '/admin/role' }            
+            { label: 'Clientes', icon: 'pi pi-fw pi-id-card', to: '/admin/cliente' },
+            { label: 'Pedidos', icon: 'pi pi-fw pi-check-square', to: '/admin/pedido' },
+            { label: 'Nuevo Pedido', icon: 'pi pi-fw pi-check-square', to: '/admin/pedido-nuevo' }            
          
         ]
     },
