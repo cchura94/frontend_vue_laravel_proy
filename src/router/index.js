@@ -10,6 +10,7 @@ import Registro from "../views/auth/Registro.vue";
 import Perfil from "../views/admin/Perfil.vue"
 import Usuario from "../views/admin/usuario/Usuario.vue"
 import Categoria from "../views/admin/categoria/Categoria.vue"
+import Producto from "../views/admin/producto/Producto.vue"
 
 import AppLayout from '@/layout/AppLayout.vue';
 
@@ -28,6 +29,7 @@ const routes = [
             { path: 'perfil', name: 'Perfil', component: Perfil, meta: {requireAuth: true} },
             { path: 'usuario', name: 'Usuario', component: Usuario, meta: {requireAuth: true} },
             { path: 'categoria', name: 'Categoria', component: Categoria, meta: {requireAuth: true} },
+            { path: 'producto', name: 'Producto', component: Producto, meta: {requireAuth: true} },
         ]
     }
 
