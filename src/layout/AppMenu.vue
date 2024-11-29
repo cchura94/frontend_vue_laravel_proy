@@ -33,7 +33,7 @@ const model = ref([
         items: [
             { label: 'Clientes', icon: 'pi pi-fw pi-id-card', to: '/admin/cliente' },
             { label: 'Pedidos', icon: 'pi pi-fw pi-check-square', to: '/admin/pedido' },
-            { label: 'Nuevo Pedido', icon: 'pi pi-fw pi-check-square', to: '/admin/pedido-nuevo' }            
+            { label: 'Nuevo Pedido', icon: 'pi pi-fw pi-check-square', to: '/admin/pedido/nuevo' }            
          
         ]
     },
