@@ -117,8 +117,11 @@
                 </div>
 
                 <div>
+                    {{ product }}
                     <span class="block font-bold mb-4">Categoria</span>
+                    <Select v-model="product.categoria_id" :options="categorias" optionLabel="nombre" optionValue="id" placeholder="Seleccionar una categoria" class="w-full md:w-56" />
                     <div class="grid grid-cols-12 gap-4">
+
                         <div class="flex items-center gap-2 col-span-6" v-for="cat in categorias" :key="cat">
                             <RadioButton id="category1" v-model="product.categoria_id" name="category" :value="cat.id" />
                             <label for="category1">{{cat.nombre}}</label>

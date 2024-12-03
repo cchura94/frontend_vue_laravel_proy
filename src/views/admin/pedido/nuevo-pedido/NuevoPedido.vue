@@ -53,6 +53,14 @@
             />
           </template>
         </Column>
+
+        <Column
+          field="stock"
+          header="STOCK"
+          sortable
+          style="min-width: 2rem"
+        ></Column>
+
         <Column field="precio" header="PRECIO" sortable style="min-width: 5rem">
           <template #body="slotProps">
             {{ formatCurrency(slotProps.data.precio) }}
@@ -62,7 +70,7 @@
           field="categoria.nombre"
           header="Categoria"
           sortable
-          style="min-width: 6rem"
+          style="min-width: 4rem"
         ></Column>
 
         <Column :exportable="false" style="min-width: 2rem">
@@ -163,7 +171,9 @@
       </div>
       <!-- Tercera fila de la segunda columna -->
       <div class="flex-1 bg-blue-100 p-2">
-                <Button label="Registrar Pedido" @click="visible = true" />
+        <Textarea v-model="pedido.observacion" rows="5" cols="30" />
+        <br>
+                <Button label="Registrar Pedido" @click="guardarPedido()" />
 
       </div>
     </div>
@@ -174,7 +184,7 @@
 import { onMounted, ref } from "vue";
 import productoService from "./../../../../services/producto.service.js";
 import clienteService from "./../../../../services/cliente.service.js";
-
+import pedidoService from "./../../../../services/pedido.service";
 
 const products = ref([]);
 const totalRecords = ref(0);
@@ -187,6 +197,7 @@ const visible = ref(false)
 const cliente = ref({})
 const cliente_seleccionado = ref({});
 const buscarCliente = ref("");
+const pedido = ref({});
 
 onMounted(() => {
   loading.value = true;
@@ -226,13 +237,25 @@ const formatCurrency = (value) => {
 };
 
 const agregarCarrito = (prod) => {
+
   let prod_carrito = {
     nombre: prod.nombre,
     precio: prod.precio,
     id: prod.id,
     cantidad: 1,
   };
-  carrito.value.push(prod_carrito);
+
+  const pos = carrito.value.findIndex(item => item.id == prod_carrito.id);
+  if(pos === -1){
+    prod.stock--;
+    carrito.value.push(prod_carrito);
+  }else{
+    if(1 <= prod.stock){
+      carrito.value[pos].cantidad++;
+      prod.stock--;
+    }
+  }
+
 };
 
 const guardarCliente = async () => {
@@ -258,5 +281,33 @@ async function getCliente(){
     } catch (error) {
         
     }
+}
+
+const guardarPedido = async () => {
+
+  try {
+    
+    let detalle = []
+    for (const prod of carrito.value) {
+      detalle.push({ "producto_id": prod.id, "cantidad": prod.cantidad});
+    }
+    
+    const datos = {
+       cliente_id: cliente_seleccionado.value.id,
+       observacion: pedido.value.observacion,
+       detalle_pedido: detalle
+    }
+  
+    await pedidoService.store(datos);
+    cliente_seleccionado.value = {};
+    pedido.value = {};
+    carrito.value = [];
+
+    alert("Pedido Registrado");
+    
+  } catch (error) {
+    alert("Ocurrió un error al registrar el Pedido");
+  }
+    
 }
 </script>
