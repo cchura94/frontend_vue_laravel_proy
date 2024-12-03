@@ -117,8 +117,8 @@
 
         <InputText
                 placeholder="Buscar..."
-                v-model="buscar"
-                @change="getProductos()"
+                v-model="buscarCliente"
+                @change="getCliente()"
               />
 
         <Button label="Crear Nuevo Cliente" @click="visible = true" />
@@ -128,7 +128,7 @@
   
     <div class="flex items-center gap-4 mb-4">
         <label for="nc" class="font-semibold w-24">Nombre Completo</label>
-        <InputText id="nc" class="flex-auto" autocomplete="off" v-model="cliente.nombre_comlpeto" />
+        <InputText id="nc" class="flex-auto" autocomplete="off" v-model="cliente.nombre_completo" />
     </div>
     <div class="flex items-center gap-4 mb-8">
         <label for="email" class="font-semibold w-24">Correo</label>
@@ -150,6 +150,15 @@
     </div>
 
 </Dialog>
+
+<div v-if="cliente_seleccionado.id">
+  
+  <h2>CLIENTE: {{ cliente_seleccionado.nombre_completo }}</h2>
+  <h2>TELEFONO: {{ cliente_seleccionado.telefono }}</h2>
+  <h2>CORREO: {{ cliente_seleccionado.correo }}</h2>
+  <h2>DIRECCION: {{ cliente_seleccionado.direccion }}</h2>
+
+</div>
 
       </div>
       <!-- Tercera fila de la segunda columna -->
@@ -176,6 +185,8 @@ const carrito = ref([]);
 
 const visible = ref(false)
 const cliente = ref({})
+const cliente_seleccionado = ref({});
+const buscarCliente = ref("");
 
 onMounted(() => {
   loading.value = true;
@@ -226,7 +237,23 @@ const agregarCarrito = (prod) => {
 
 const guardarCliente = async () => {
     try {
-        await clienteService.store(cliente.value);
+        const {data} = await clienteService.store(cliente.value);
+        cliente_seleccionado.value = data;
+
+        visible.value = false;
+        cliente.value = {}
+
+        
+    } catch (error) {
+        
+    }
+}
+
+async function getCliente(){
+  try {
+        const {data} = await clienteService.buscarCliente(buscarCliente.value);
+        cliente_seleccionado.value = data;
+
         
     } catch (error) {
         

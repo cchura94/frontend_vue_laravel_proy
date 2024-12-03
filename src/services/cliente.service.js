@@ -10,4 +10,7 @@ export default {
     show: (id) => {
         return Api().get(`/cliente/${id}`);
     },
+    buscarCliente: (buscar) => {
+        return Api().get(`/cliente-buscar?q=${buscar}`);
+    }
 }
