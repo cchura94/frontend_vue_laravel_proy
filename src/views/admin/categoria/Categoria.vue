@@ -11,7 +11,7 @@
     <span class="text-surface-500 dark:text-surface-400 block mb-8">Categoria.</span>
     <div class="flex items-center gap-4 mb-4">
         <label for="nom" class="font-semibold w-24">Nombre</label>
-        <InputText id="nom" class="flex-auto" autocomplete="off" v-model="categoria.nombre" />
+        <InputText id="nom" class="flex-auto" autocomplete="off" v-model="categoria.nombre" :invalid="!categoria.nombre" placeholder="Ingrese Categoria" />
         {{errors.nombre}}
     </div>
     <div class="flex items-center gap-4 mb-8">

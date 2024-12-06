@@ -10,4 +10,7 @@ export default {
     show: (id) => {
         return Api().get(`/pedido/${id}`);
     },
+    generarPDF: (id) => {
+        return Api().get(`/pedido/${id}/recibo`, {responseType: 'blob'});
+    }
 }

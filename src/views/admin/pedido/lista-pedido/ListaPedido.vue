@@ -8,7 +8,7 @@
         <Column header="PRODUCTOS">
             <template #body="slotProps">
                 <Button label="Mostrar Detalle Pedido" icon="pi pi-external-link" @click="mostrarDetallePedido(slotProps.data)" />
-
+                <Button label="PDF" icon="pi pi-file-pdf" @click="descargarPDF(slotProps.data)" />
             </template>
         </Column>
     </DataTable>
@@ -52,4 +52,18 @@ const mostrarDetallePedido = (p) => {
     dialogVisible.value = true;
     pedido.value = p;
 } 
+
+const descargarPDF = async (ped) => {
+    const respuesta = await pedidoService.generarPDF(ped.id);
+
+    const url = window.URL.createObjectURL(new Blob([respuesta.data], {type: 'application/pdf'}));
+
+    const link = document.createElement('a');
+    link.href = url;
+
+    link.setAttribute('download', `recibo-${ped.id}.pdf`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
 </script>
