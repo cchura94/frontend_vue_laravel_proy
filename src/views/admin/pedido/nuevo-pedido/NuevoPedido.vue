@@ -227,6 +227,11 @@ const getProductos = async () => {
   loading.value = false;
 };
 
+const onPage = (event) => {
+    lazyParams.value = event;
+    getProductos(event);
+};
+
 const formatCurrency = (value) => {
   if (value)
     return value.toLocaleString("en-US", {
